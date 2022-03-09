@@ -10,6 +10,8 @@ namespace Admin
     {
         static void Main(string[] args)
         {
+            Menu menu = new Menu();
+            menu.Show_Menu_Gym();
         }
     }
 }

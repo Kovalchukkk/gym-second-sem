@@ -20,5 +20,18 @@ namespace Gym
                 data[i].Id = i;
             }
         }
+
+        public void SetTrainer(Visitor item, int indx = 0)
+        {
+            try
+            {
+                item += data[indx];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("We can't find this trainer in the list!");
+            }
+               
+        }
     }
 }

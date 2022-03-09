@@ -22,7 +22,7 @@ namespace Gym
         public override string ToString()
         {
             if (Personal_trainer != "")
-                return $"Visitor: {Name}\t\tCountry: {Country}\tTrainer: {Personal_trainer}\t\tMembership card: {Membership_card}";
+                return $"Visitor: {Name}\t\tCountry: {Country}\tTrainer: {Personal_trainer}\t\tMembership card: {Membership_card}\t\tTrainer id: {Trainer_id}";
             else
                 return $"Visitor: {Name}\t\tCountry: {Country}\tMembership card: {Membership_card}";
         }
@@ -44,11 +44,13 @@ namespace Gym
                 case "beginner":
                     this.Membership_price = 500;
                     break;
-                case "strong":
+                case "average":
                     this.Membership_price = 800;
                     break;
                 case "professional":
                     this.Membership_price = 2000;
+                    break;
+                default:
                     break;
 
             }
