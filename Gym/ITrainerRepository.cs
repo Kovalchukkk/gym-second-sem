@@ -11,5 +11,6 @@ namespace Gym
         void MaxTrainer();
         void SetId();
         void SetTrainer(Visitor item, int indx = 0);
+
     }
 }

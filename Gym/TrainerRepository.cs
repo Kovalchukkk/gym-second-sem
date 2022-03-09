@@ -27,6 +27,7 @@ namespace Gym
             {
                 item += data[indx];
             }
+
             catch (ArgumentOutOfRangeException)
             {
                 Console.WriteLine("We can't find this trainer in the list!");

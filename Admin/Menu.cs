@@ -78,7 +78,8 @@ Choose an operation:
 					trainerRepository.Show();
 					break;
 				case "6":
-			
+					
+
 					break;
 				default:
 					break;

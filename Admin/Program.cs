@@ -12,6 +12,7 @@ namespace Admin
         {
             Menu menu = new Menu();
             menu.Show_Menu_Gym();
+
         }
     }
 }

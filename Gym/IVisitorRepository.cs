@@ -4,5 +4,6 @@
     {
         void ShowDiscount(int indx);
         void ShowTheMostPopularTrainer();
+
     }
 }
