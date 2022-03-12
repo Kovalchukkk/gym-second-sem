@@ -20,7 +20,7 @@ namespace Gym
         }
 
         public void Del(int indx)
-        {
+        {   
             data.Remove(data[indx]);
         }
 

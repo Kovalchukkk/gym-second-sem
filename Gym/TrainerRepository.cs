@@ -10,7 +10,7 @@ namespace Gym
     {
         public void MaxTrainer()
         {
-
+            //TODO
         }
 
         public void SetId()
@@ -23,16 +23,7 @@ namespace Gym
 
         public void SetTrainer(Visitor item, int indx = 0)
         {
-            try
-            {
-                item += data[indx];
-            }
-
-            catch (ArgumentOutOfRangeException)
-            {
-                Console.WriteLine("We can't find this trainer in the list!");
-            }
-               
+            item += data[indx];   
         }
     }
 }

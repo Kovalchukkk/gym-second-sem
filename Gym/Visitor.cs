@@ -22,9 +22,9 @@ namespace Gym
         public override string ToString()
         {
             if (Personal_trainer != "")
-                return $"Visitor: {Name}\t\tCountry: {Country}\tTrainer: {Personal_trainer}\t\tMembership card: {Membership_card}\t\tTrainer id: {Trainer_id}";
+                return $"Visitor: {Name}\t\tCountry: {Country}\t\tMembership card: {Membership_card}\t\tTrainer: {Personal_trainer} Trainer id: {Trainer_id}";
             else
-                return $"Visitor: {Name}\t\tCountry: {Country}\tMembership card: {Membership_card}";
+                return $"Visitor: {Name}\t\tCountry: {Country}\t\tMembership card: {Membership_card}";
         }
         
         //auto property
