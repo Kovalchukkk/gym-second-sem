@@ -17,7 +17,7 @@ namespace Gym
 
         public override string ToString()
         {
-            return $"Trainer: {Name}\t\tExperience: {Experience}";
+            return $"Trainer: {Name}\t\tExperience: {Experience}\t\tId: {Id}";
         }
 
 

@@ -51,6 +51,7 @@ namespace Gym
                     this.Membership_price = 2000;
                     break;
                 default:
+                    this.Membership_price = 0;
                     break;
 
             }

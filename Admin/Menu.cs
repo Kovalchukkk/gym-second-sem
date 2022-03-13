@@ -54,6 +54,8 @@ Choose an operation:
 5 - To view registered trainers
 6 - To delete a trainer by index;
 D - To view visitors discounts;
+M - To view the most experienced trainer;
+P - To view the most popular trainer;
 0 - Exit;
 ";
             Console.WriteLine(menu);
@@ -83,6 +85,30 @@ D - To view visitors discounts;
 					break;
 				case "D":
 					Menu_Visitor_Show_Discount();
+					break;
+				case "M":
+                    try 
+					{
+						trainerRepository.Show();
+						trainerRepository.MaxTrainer();
+					}
+					
+					catch (Exception)
+                    {
+                        Console.WriteLine("The list of trainers is empty!");
+                    }
+					break;
+				case "P":
+                    try
+                    {
+						visitorRepository.Show();
+						visitorRepository.ShowTheMostPopularTrainer();
+					}
+					
+					catch (FormatException)
+                    {
+                        Console.WriteLine("The list of trainers is empty!");
+                    }
 					break;
 				default:
 					break;

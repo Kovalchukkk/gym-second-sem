@@ -24,7 +24,57 @@ namespace Gym
 
         public void ShowTheMostPopularTrainer()
         {
-            //TODO    
+            string[] m = InitializeArray().Split();
+            Array.Sort(m);
+            string maxWord = "", word = "";
+            int maxCount = 0, count = 1, res = 0;
+            
+            foreach (string s in m)
+            {
+                if (s.Equals(word))
+                {
+                    count++;
+                }
+                else
+                {
+                    if (count > maxCount)
+                    {
+                        maxCount = count;
+                        maxWord = word;
+                    }
+                    word = s;
+                    count = 1;
+                }
+            }
+
+            if (count > maxCount)
+            {
+                maxCount = count;
+                maxWord = word;
+            }
+
+            res = int.Parse(maxWord);
+
+            Console.WriteLine("The most popular trainer: " + data[res].Personal_trainer);
+        }
+
+        private string InitializeArray()
+        {
+            string temp = "";
+        
+            for (int i = 0; i < data.Count; i++)
+            {
+                if (i == data.Count - 1)
+                {
+                    temp += data[i].Trainer_id;
+                }
+                else
+                {
+                    temp += data[i].Trainer_id + " ";
+                }
+            }
+
+            return temp;
         }
     }
 }

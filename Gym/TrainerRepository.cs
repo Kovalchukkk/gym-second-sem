@@ -10,7 +10,19 @@ namespace Gym
     {
         public void MaxTrainer()
         {
-            //TODO
+            int index = 0;
+            int max = data[0].Experience;
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                if (data[i].Experience > max)
+                {
+                    max = data[i].Experience;
+                    index = i;
+                }
+            }
+
+            Console.WriteLine("The most experienced trainer is " + data[index].Name);
         }
 
         public void SetId()
