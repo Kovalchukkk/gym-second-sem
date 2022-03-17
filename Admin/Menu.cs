@@ -90,7 +90,7 @@ P - To view the most popular trainer;
                     try 
 					{
 						trainerRepository.Show();
-						trainerRepository.MaxTrainer();
+                        Console.WriteLine("The most experienced trainer is " + trainerRepository.MaxTrainer());
 					}
 					
 					catch (Exception)

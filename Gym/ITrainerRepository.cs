@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Gym
 {
-    public interface ITrainerRepository
+    public interface ITrainerRepository : IRepository<Trainer>
     {
-        void MaxTrainer();
+       string MaxTrainer();
         void SetId();
         void SetTrainer(Visitor item, int indx = 0);
 

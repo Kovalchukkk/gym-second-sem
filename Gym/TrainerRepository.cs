@@ -8,7 +8,7 @@ namespace Gym
 {
     public class TrainerRepository : Repository<Trainer>, ITrainerRepository
     {
-        public void MaxTrainer()
+        public string MaxTrainer()
         {
             int index = 0;
             int max = data[0].Experience;
@@ -22,7 +22,7 @@ namespace Gym
                 }
             }
 
-            Console.WriteLine("The most experienced trainer is " + data[index].Name);
+            return data[index].Name;
         }
 
         public void SetId()
