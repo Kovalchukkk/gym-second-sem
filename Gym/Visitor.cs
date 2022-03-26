@@ -8,7 +8,8 @@ namespace Gym
 {
     public class Visitor : IHuman
     {
-        public Visitor(string name = "", string birthday = "", string country = "", string membership_card = "", string personal_trainer = "", int trainer_id = 0, double discount = 0.8)
+        public const double DISCOUNT = 20;
+        public Visitor(string name = "", string birthday = "", string country = "", string membership_card = "", string personal_trainer = "", int trainer_id = 0)
         {
             this.Name = name;
             this.Birthday = birthday;
@@ -16,7 +17,6 @@ namespace Gym
             this.Personal_trainer = personal_trainer;
             this.Membership_card = membership_card;
             this.Trainer_id = trainer_id;
-            this.Discount = discount;
         }
 
         public override string ToString()
@@ -35,7 +35,6 @@ namespace Gym
         public string Membership_card { get; set; }
         public int Trainer_id { get; set; }
         public int Membership_price { get; set; }
-        public double Discount { get; set; }
 
         public void SetMembership_price(string value)
         {

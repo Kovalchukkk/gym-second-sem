@@ -13,10 +13,11 @@ namespace Gym
             DateTime now = DateTime.Now;
             string currentdate = now.Day.ToString() + now.Month.ToString();
             double changedprice = 0;
+            double discount = Visitor.DISCOUNT;
             if (data[indx].Birthday == currentdate)
             {
-                changedprice += Convert.ToDouble(data[indx].Membership_price) * data[indx].Discount;
-                Console.WriteLine("Happy Birthday! You received 20% discount!!! Now your gym membership price is " + changedprice);
+                changedprice += Convert.ToDouble(data[indx].Membership_price) * ((100 - discount) / 100);
+                Console.WriteLine("Happy Birthday! You received " + discount + "% discount!!! Now your gym membership price is " + changedprice);
             }
             else
                 Console.WriteLine("You don't have any discounts!");
