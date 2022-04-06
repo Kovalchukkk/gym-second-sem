@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Gym
 {
-    public class TrainerRepository : Repository<Trainer>, ITrainerRepository
+    public class TrainerRepository : Repository<Trainer>
     {
-        public string MaxTrainer()
+        public override string MaxTrainer()
         {
             int index = 0;
             int max = data[0].Experience;
@@ -25,7 +25,7 @@ namespace Gym
             return data[index].Name;
         }
 
-        public void SetId()
+        public override void SetId()
         {
             for (int i = 0; i < data.Count; i++)
             {
@@ -33,9 +33,17 @@ namespace Gym
             }
         }
 
-        public void SetTrainer(Visitor item, int indx = 0)
+        public override void SetTrainer(Visitor item, int indx = 0)
         {
             item += data[indx];   
+        }
+
+        public override void Show()
+        {
+            foreach (var item in data)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

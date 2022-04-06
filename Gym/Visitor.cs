@@ -9,34 +9,32 @@ namespace Gym
     public class Visitor : IHuman
     {
         public const double DISCOUNT = 20;
-        public Visitor(string name = "", string birthday = "", string country = "", string membership_card = "", string personal_trainer = "", int trainer_id = 0)
+        public Visitor(string name = "", string country = "", string membership_card = "", string birthday = "", string personal_trainer = "", int trainer_id = 0)
         {
             this.Name = name;
-            this.Birthday = birthday;
             this.Country = country;
-            this.Personal_trainer = personal_trainer;
             this.Membership_card = membership_card;
+            this.Birthday = birthday;
+            this.Personal_trainer = personal_trainer;
             this.Trainer_id = trainer_id;
+            SetMembership_price(membership_card);
         }
 
         public override string ToString()
         {
-            if (Personal_trainer != "")
-                return $"Visitor: {Name}\t\tCountry: {Country}\t\tMembership card: {Membership_card}\t\tTrainer: {Personal_trainer} Trainer id: {Trainer_id}";
-            else
-                return $"Visitor: {Name}\t\tCountry: {Country}\t\tMembership card: {Membership_card}";
+            return $"Visitor: {Name}\t\tCountry: {Country}\t\tMembership card: {Membership_card}\t\tTrainer: {Personal_trainer} Trainer id: {Trainer_id}";
         }
         
         //auto property
         public string Name { get; set; }
-        public string Birthday { get; set; }
         public string Country { get; set; }
-        public string Personal_trainer { get; set; }
         public string Membership_card { get; set; }
+        public string Birthday { get; set; }
+        public string Personal_trainer { get; set; }
         public int Trainer_id { get; set; }
         public int Membership_price { get; set; }
 
-        public void SetMembership_price(string value)
+        private void SetMembership_price(string value)
         {
             switch (value)
             {

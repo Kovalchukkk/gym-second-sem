@@ -1,0 +1,3 @@
+Andriy,5,0
+Olexandr,10,1
+Maksym,10,2

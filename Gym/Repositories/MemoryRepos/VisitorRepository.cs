@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Gym
 {
-    public class VisitorRepository : Repository<Visitor>, IVisitorRepository
+    public class VisitorRepository : Repository<Visitor>
     {
-        public void ShowDiscount(int indx)
+        public override void ShowDiscount(int indx)
         {
             DateTime now = DateTime.Now;
             string currentdate = now.Day.ToString() + now.Month.ToString();
@@ -23,7 +23,7 @@ namespace Gym
                 Console.WriteLine("You don't have any discounts!");
         }
 
-        public void ShowTheMostPopularTrainer()
+        public override void ShowTheMostPopularTrainer()
         {
             string[] m = InitializeArray().Split();
             Array.Sort(m);
@@ -76,6 +76,14 @@ namespace Gym
             }
 
             return temp;
+        }
+
+        public override void Show()
+        {
+            foreach (var item in data)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

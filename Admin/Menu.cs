@@ -9,13 +9,16 @@ namespace Admin
 {
     class Menu
     {
-        VisitorRepository visitorRepository;
-        TrainerRepository trainerRepository;
+        Repository<Visitor> VisitorRepository;
+        Repository<Trainer> TrainerRepository;
+        Logger logger = new Logger();
 
-        public Menu()
+		public Menu()
         {
-            visitorRepository = new VisitorRepository();
-            trainerRepository = new TrainerRepository();
+            var factory = FactoryCreator.GetFactory();
+            VisitorRepository = factory.GetVisitorRepository();
+            TrainerRepository = factory.GetTrainerRepository();
+            
         }
 
 		public void Show_Menu_Gym()
@@ -69,8 +72,8 @@ P - To view the most popular trainer;
 					Menu_Visitor_Add();
 					break;
 				case "2":
-					visitorRepository.Show();
-					break;
+                    VisitorRepository.Show();
+                    break;
 				case "3":
 					Menu_Visitor_Delete();
 					break;
@@ -78,39 +81,41 @@ P - To view the most popular trainer;
 					Menu_Trainer_Add();
 					break;
 				case "5":
-					trainerRepository.Show();
+					TrainerRepository.Show();
 					break;
 				case "6":
 					Menu_Trainer_Delete();
 					break;
-				case "D":
-					Menu_Visitor_Show_Discount();
-					break;
-				case "M":
-                    try 
-					{
-						trainerRepository.Show();
-                        Console.WriteLine("The most experienced trainer is " + trainerRepository.MaxTrainer());
-					}
-					
-					catch (Exception)
-                    {
-                        Console.WriteLine("The list of trainers is empty!");
-                    }
-					break;
-				case "P":
+                case "D":
+                    Menu_Visitor_Show_Discount();
+                    break;
+                case "M":
                     try
                     {
-						visitorRepository.Show();
-						visitorRepository.ShowTheMostPopularTrainer();
-					}
-					
-					catch (FormatException)
+                        TrainerRepository.Show();
+                        Console.WriteLine("The most experienced trainer is " + TrainerRepository.MaxTrainer());
+                    }
+
+                    catch (Exception)
                     {
+                        logger.Exception("The list of trainers is empty!");
                         Console.WriteLine("The list of trainers is empty!");
                     }
-					break;
-				default:
+                    break;
+                case "P":
+                    try
+                    {
+                        VisitorRepository.Show();
+                        VisitorRepository.ShowTheMostPopularTrainer();
+                    }
+
+                    catch (FormatException)
+                    {
+                        logger.Exception("The list of trainers is empty!");
+                        Console.WriteLine("The list of trainers is empty!");
+                    }
+                    break;
+                default:
 					break;
 			}
 		}
@@ -119,150 +124,141 @@ P - To view the most popular trainer;
         {
 			Visitor temp;
 			string name, birthday, country, membership_card;
+            int index = 0, res = 0;
             Console.WriteLine("Enter a name: ");
 			name = Console.ReadLine();
-            Console.WriteLine("Enter a birthday(day month): ");
-			birthday = Console.ReadLine();
-            Console.WriteLine("Enter a country: ");
+			Console.WriteLine("Enter a country: ");
 			country = Console.ReadLine();
-            Console.WriteLine("Enter a membership_card(beginner (1 year=500$), average (2 years = 800$), professional(5 years = 2000$)): ");
+			Console.WriteLine("Enter a membership_card(beginner (1 year=500$), average (2 years = 800$), professional(5 years = 2000$)): ");
 			membership_card = Console.ReadLine();
+			Console.WriteLine("Enter a birthday(day month): ");
+            birthday = Console.ReadLine();
+            temp = new Visitor(name, country, membership_card, birthday);
+            Console.WriteLine("Please choose a trainer from the list: ");
+            TrainerRepository.Show();
+            res = SafeIndexInput(index);
 
-			temp = new Visitor(name, birthday, country, membership_card);
-			temp.SetMembership_price(membership_card);
-
-            string choice;
-			int index = 0, res = 0;
-            Console.WriteLine("Do you want to choose a trainer? (yes/no)");
-			choice = Console.ReadLine();
-
-			switch (choice)
+            if (res != -1)
             {
-				case "yes":
-					Console.WriteLine("The list of trainers: ");
-					trainerRepository.Show();
+                try
+                {
+                    TrainerRepository.SetTrainer(temp, res);
+                    Console.WriteLine("Trainer was successfully selected!");
+                    VisitorRepository.Add(temp);
+                    Console.WriteLine("Visitor added!!!");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    logger.Exception("We can't find this trainer in the list!");
+                    Console.WriteLine("We can't find this trainer in the list!");
+                }
+            }
 
-					res = SafeIndexInput(index);
-					
-					if (res != -1)
-					{
-                        try 
-						{
-							trainerRepository.SetTrainer(temp, res);
-							visitorRepository.Add(temp);
-                            Console.WriteLine("Trainer was successfully selected!");
-                            Console.WriteLine("Visitor added!!!");
-						}
-						catch (ArgumentOutOfRangeException)
-                        {
-							Console.WriteLine("We can't find this trainer in the list!");
-						}	
-					}
+            else
+            {
+                logger.Exception("We can't find this trainer in the list!");
+                Console.WriteLine("We can't find this trainer in the list!");
+            }
+		}
 
-					else
-					{
-						Console.WriteLine("We can't find this trainer in the list!");
-					}
-					break;
-				case "no":
-					visitorRepository.Add(temp);
-					Console.WriteLine("Visitor added!!!");
-					break;
-				default:
-					break;
-			}
-        }
-
-		void Menu_Trainer_Add()
+        void Menu_Trainer_Add()
         {
-			Trainer temp;
-			string name;
-			int experience;
+            Trainer temp;
+            string name;
+            int experience;
             Console.WriteLine("Enter a name: ");
-			name = Console.ReadLine();
+            name = Console.ReadLine();
             Console.WriteLine("Enter an experience: ");
-			experience = Convert.ToInt32(Console.ReadLine());
-			temp = new Trainer(name, experience);
-			trainerRepository.Add(temp);
-			trainerRepository.SetId();
+            experience = Convert.ToInt32(Console.ReadLine());
+            temp = new Trainer(name, experience);
+            TrainerRepository.Add(temp);
+            TrainerRepository.SetId();
             Console.WriteLine("Trainer added!!!");
         }
-		
-		void Menu_Visitor_Delete()
+
+        void Menu_Visitor_Delete()
         {
 			int del_indx = 0, res = 0;
+            VisitorRepository.Show();
 			res = SafeIndexInput(del_indx);
 			
 			if (res != -1)
             {
 				try
 				{
-					visitorRepository.Del(res);
+					VisitorRepository.Del(res);
 					Console.WriteLine("Visitor deleted!!!");
 				}
 
 				catch (ArgumentOutOfRangeException)
 				{
-					Console.WriteLine("We can't find this visitor in the list!");
+                    logger.Exception("We can't find this visitor in the list!");
+                    Console.WriteLine("We can't find this visitor in the list!");
 				}
 			}
 			
 			else
             {
+                logger.Exception("We can't find this visitor in the list!");
                 Console.WriteLine("We can't find this visitor in the list!");
             }
         }
 
-		void Menu_Trainer_Delete()
-		{
-			int del_indx = 0, res = 0;
-			res = SafeIndexInput(del_indx);
-
-			if (res != -1)
-			{
-				try
-				{
-					trainerRepository.Del(res);
-					Console.WriteLine("Trainer deleted!!!");
-				}
-
-				catch (ArgumentOutOfRangeException)
-				{
-					Console.WriteLine("We can't find this trainer in the list!");
-				}
-			}
-
-			else
-			{
-				Console.WriteLine("We can't find this trainer in the list!");
-			}
-		}
-
-		void Menu_Visitor_Show_Discount()
+        void Menu_Trainer_Delete()
         {
-			int indx_ = 0, res = 0;
-			res = SafeIndexInput(indx_);
+            int del_indx = 0, res = 0;
+            TrainerRepository.Show();
+            res = SafeIndexInput(del_indx);
 
-			if (res != -1)
-			{
-				try
-				{
-					visitorRepository.ShowDiscount(res);
-				}
+            if (res != -1)
+            {
+                try
+                {
+                    TrainerRepository.Del(res);
+                    Console.WriteLine("Trainer deleted!!!");
+                }
 
-				catch (ArgumentOutOfRangeException)
-				{
-					Console.WriteLine("We can't find this visitor in the list!");
-				}
-			}
+                catch (ArgumentOutOfRangeException)
+                {
+                    logger.Exception("We can't find this trainer in the list!");
+                    Console.WriteLine("We can't find this trainer in the list!");
+                }
+            }
 
-			else
-			{
-				Console.WriteLine("We can't find this visitor in the list!");
-			}
-		}
+            else
+            {
+                logger.Exception("We can't find this trainer in the list!");
+                Console.WriteLine("We can't find this trainer in the list!");
+            }
+        }
 
-		int SafeIndexInput(int _indx)
+        void Menu_Visitor_Show_Discount()
+        {
+            int indx_ = 0, res = 0;
+            res = SafeIndexInput(indx_);
+
+            if (res != -1)
+            {
+                try
+                {
+                    VisitorRepository.ShowDiscount(res);
+                }
+
+                catch (ArgumentOutOfRangeException)
+                {
+                    logger.Exception("We can't find this visitor in the list!");
+                    Console.WriteLine("We can't find this visitor in the list!");
+                }
+            }
+
+            else
+            {
+                logger.Exception("We can't find this visitor in the list!");
+                Console.WriteLine("We can't find this visitor in the list!");
+            }
+        }
+
+        int SafeIndexInput(int _indx)
         {
 			Console.WriteLine("Please enter an index: ");
 			try

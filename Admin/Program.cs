@@ -12,6 +12,9 @@ namespace Admin
         {
             Menu menu = new Menu();
             menu.Show_Menu_Gym();
+            //var str = "Oleg,25";
+            //var arr = str.Split(',');
+            //Console.WriteLine(arr[0]);
 
         }
     }
