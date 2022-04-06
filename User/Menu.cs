@@ -8,14 +8,16 @@ namespace User
 {
     class Menu
     {
-        VisitorRepository visitorRepository;
-        TrainerRepository trainerRepository;
+		Repository<Visitor> VisitorRepository;
+		Repository<Trainer> TrainerRepository;
+		Logger logger = new Logger();
 
-        public Menu()
+		public Menu()
         {
-            visitorRepository = new VisitorRepository();
-            trainerRepository = new TrainerRepository();
-        }
+			var factory = FactoryCreator.GetFactory();
+			VisitorRepository = factory.GetVisitorRepository();
+			TrainerRepository = factory.GetTrainerRepository();
+		}
 
 		public void Show_Menu_Gym()
 		{
@@ -52,10 +54,10 @@ P - To view the most popular trainer;
 			switch (input)
 			{
 				case "1":
-					visitorRepository.Show();
+					VisitorRepository.Show();
 					break;
 				case "2":
-					trainerRepository.Show();
+					TrainerRepository.Show();
 					break;
 				case "D":
 					Menu_Visitor_Show_Discount();
@@ -63,24 +65,26 @@ P - To view the most popular trainer;
 				case "M":
 					try
 					{
-						trainerRepository.Show();
-						trainerRepository.MaxTrainer();
+						TrainerRepository.Show();
+						Console.WriteLine("The most experienced trainer is " + TrainerRepository.MaxTrainer());
 					}
 
 					catch (Exception)
 					{
+						logger.Exception("The list of trainers is empty!");
 						Console.WriteLine("The list of trainers is empty!");
 					}
 					break;
 				case "P":
 					try
 					{
-						visitorRepository.Show();
-						visitorRepository.ShowTheMostPopularTrainer();
+						VisitorRepository.Show();
+						VisitorRepository.ShowTheMostPopularTrainer();
 					}
 
 					catch (FormatException)
 					{
+						logger.Exception("The list of trainers is empty!");
 						Console.WriteLine("The list of trainers is empty!");
 					}
 					break;
@@ -98,11 +102,12 @@ P - To view the most popular trainer;
 			{
 				try
 				{
-					visitorRepository.ShowDiscount(res);
+					VisitorRepository.ShowDiscount(res);
 				}
 
 				catch (ArgumentOutOfRangeException)
 				{
+					logger.Exception("We can't find this visitor in the list!");
 					Console.WriteLine("We can't find this visitor in the list!");
 				}
 			}
