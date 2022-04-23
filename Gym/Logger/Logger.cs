@@ -19,12 +19,14 @@ namespace Gym
                 {
                     sw.WriteLine(DateTime.Now.ToString());
                     sw.WriteLine(log);
+                    
                 }
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
             }
+           
         }
 
     }

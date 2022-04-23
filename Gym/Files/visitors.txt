@@ -1,5 +1,5 @@
-Oksana,Ukraine,beginner,123,Andriy,0
-Oleg,Ukraine,beginner,156,Andriy,0
-Mykola,USA,professional,137,Andriy,0
-Dmytro,Ukraine,beginner,135,Maksym,2
 Mykola,Ukraine,average,54,Maksym,2
+Mykola,Ukraine,beginner,235,Andriy,0
+Oksana,Ukraine,beginner,134,Andriy,0
+Oleg,Spain,average,134,Andriy,0
+Maksym,Ukraine,beginner,204,Olexandr,1

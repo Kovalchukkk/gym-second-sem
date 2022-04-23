@@ -11,6 +11,7 @@ namespace Admin
     {
         Repository<Visitor> VisitorRepository;
         Repository<Trainer> TrainerRepository;
+        Helper helper = new Helper();
         Logger logger = new Logger();
 
 		public Menu()
@@ -106,7 +107,7 @@ P - To view the most popular trainer;
                     try
                     {
                         VisitorRepository.Show();
-                        VisitorRepository.ShowTheMostPopularTrainer();
+                        Console.WriteLine(helper.ShowTheMostPopularTrainer());
                     }
 
                     catch (FormatException)
@@ -241,7 +242,7 @@ P - To view the most popular trainer;
             {
                 try
                 {
-                    VisitorRepository.ShowDiscount(res);
+                    Console.WriteLine(VisitorRepository.ShowDiscount(res));
                 }
 
                 catch (ArgumentOutOfRangeException)

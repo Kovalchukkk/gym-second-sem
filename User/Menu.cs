@@ -11,7 +11,7 @@ namespace User
 		Repository<Visitor> VisitorRepository;
 		Repository<Trainer> TrainerRepository;
 		Logger logger = new Logger();
-
+		Helper helper = new Helper();
 		public Menu()
         {
 			var factory = FactoryCreator.GetFactory();
@@ -79,7 +79,7 @@ P - To view the most popular trainer;
 					try
 					{
 						VisitorRepository.Show();
-						VisitorRepository.ShowTheMostPopularTrainer();
+                        Console.WriteLine(helper.ShowTheMostPopularTrainer());
 					}
 
 					catch (FormatException)
@@ -102,7 +102,7 @@ P - To view the most popular trainer;
 			{
 				try
 				{
-					VisitorRepository.ShowDiscount(res);
+                    Console.WriteLine(VisitorRepository.ShowDiscount(res));
 				}
 
 				catch (ArgumentOutOfRangeException)

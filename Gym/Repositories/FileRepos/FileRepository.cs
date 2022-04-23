@@ -18,9 +18,9 @@ namespace Gym
             FileName = filename;
         }
 
-        public abstract void ReadFromFile(); //зчитування з файлу (метод абстрактний, бо реалізація буде в дочірніх класах VisitorFileRepository
-                                             //та TrainerFileRepository)
-        public abstract void WriteToFile(); //запис у файл
+        public abstract void ReadFromFile();
+                                             
+        public abstract void WriteToFile(); 
 
         protected void SyncRead()
         {

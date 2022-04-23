@@ -103,5 +103,9 @@ namespace Gym
             }
         }
 
+        public override List<Trainer> GetAll()
+        {
+            return data;
+        }
     }
 }

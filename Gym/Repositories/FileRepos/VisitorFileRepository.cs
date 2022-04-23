@@ -66,7 +66,7 @@ namespace Gym
         }
 
 
-        public override void ShowDiscount(int indx)
+        public override string ShowDiscount(int indx)
         {
             DateTime now = DateTime.Now;
             string currentdate = now.Day.ToString() + now.Month.ToString();
@@ -75,66 +75,13 @@ namespace Gym
             if (data[indx].Birthday == currentdate)
             {
                 changedprice += Convert.ToDouble(data[indx].Membership_price) * ((100 - discount) / 100);
-                Console.WriteLine("Happy Birthday! You received " + discount + "% discount!!! Now your gym membership price is " + changedprice);
+                return "Happy Birthday! You received " + discount + "% discount!!! Now your gym membership price is " + changedprice;
             }
             else
-                Console.WriteLine("You don't have any discounts!");
+                return "You don't have any discounts!";
         }
 
-        public override void ShowTheMostPopularTrainer()
-        {
-            string[] m = InitializeArray().Split();
-            Array.Sort(m);
-            string maxWord = "", word = "";
-            int maxCount = 0, count = 1, res = 0;
-
-            foreach (string s in m)
-            {
-                if (s.Equals(word))
-                {
-                    count++;
-                }
-                else
-                {
-                    if (count > maxCount)
-                    {
-                        maxCount = count;
-                        maxWord = word;
-                    }
-                    word = s;
-                    count = 1;
-                }
-            }
-
-            if (count > maxCount)
-            {
-                maxCount = count;
-                maxWord = word;
-            }
-
-            res = int.Parse(maxWord);
-
-            Console.WriteLine("The most popular trainer: " + data[res].Personal_trainer);
-        }
-
-        private string InitializeArray()
-        {
-            string temp = "";
-
-            for (int i = 0; i < data.Count; i++)
-            {
-                if (i == data.Count - 1)
-                {
-                    temp += data[i].Trainer_id;
-                }
-                else
-                {
-                    temp += data[i].Trainer_id + " ";
-                }
-            }
-
-            return temp;
-        }
+        
 
         public override void Show()
         {
@@ -143,6 +90,11 @@ namespace Gym
             {
                 Console.WriteLine(item);
             }
+        }
+
+        public override List<Visitor> GetAll()
+        {
+            return data;
         }
     }
 }

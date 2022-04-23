@@ -45,5 +45,10 @@ namespace Gym
                 Console.WriteLine(item);
             }
         }
+
+        public override List<Trainer> GetAll()
+        {
+            return data;
+        }
     }
 }
