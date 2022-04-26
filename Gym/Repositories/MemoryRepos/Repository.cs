@@ -13,15 +13,18 @@ namespace Gym
 
         public virtual void Add(T item)
         {
-            data.Add(item);            
+            data.Add(item);
         }
 
         public abstract List<T> GetAll();
 
         public virtual void Del(int indx)
-        {   
-            data.Remove(data[indx]);
+        {   if (indx < 0)
+                throw new Exception("Negative index!");
+            else
+                data.Remove(data[indx]);
         }
+
 
         public abstract void Show();
 

@@ -8,8 +8,8 @@ namespace Gym
 {
     public class Helper
     {
-        Repository<Visitor> visitorRepository;
-        Repository<Trainer> trainerRepository;
+        public Repository<Visitor> visitorRepository;
+        public Repository<Trainer> trainerRepository;
 
         public Helper()
         {
@@ -74,5 +74,6 @@ namespace Gym
 
             return temp;
         }
+
     }
 }
