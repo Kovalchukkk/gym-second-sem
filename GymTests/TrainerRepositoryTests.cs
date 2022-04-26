@@ -46,7 +46,7 @@ namespace GymTests
             trainerRepository.Add(trainer2);
             Trainer trainer3 = new Trainer("Olexandr", 15, 2);
             trainerRepository.Add(trainer3);
-            string expected = "Maksym";
+            string expected = trainer2.Name;
             string actual = trainerRepository.MaxTrainer();
             Assert.AreEqual(expected, actual);
 
