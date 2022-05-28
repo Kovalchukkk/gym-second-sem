@@ -13,8 +13,8 @@ namespace GymTests
         public void TestDeleteVisitorByNegIndex_ThrowException()
         {
             Repository<Visitor> visitorRepository;
-            var factory = FactoryCreator.GetFactory();
-            visitorRepository = factory.GetVisitorRepository();
+            //var factory = FactoryCreator.GetFactory();
+            visitorRepository = new VisitorRepository();
             Assert.ThrowsException<Exception>(() => visitorRepository.Del(-1));
         }
 
@@ -22,14 +22,14 @@ namespace GymTests
         public void TestAddVisitor()
         {
             Repository<Visitor> visitorRepository;
-            var factory = FactoryCreator.GetFactory();
-            visitorRepository = factory.GetVisitorRepository();
+            //var factory = FactoryCreator.GetFactory();
+            visitorRepository = new VisitorRepository();
             Visitor visitor = new Visitor("Maksym", "Ukraine", "beginner", "254", "Andriy", 0);
             visitorRepository.Add(visitor);
             List<Visitor> expected = new List<Visitor>();
             List<Visitor> actual = new List<Visitor>();
             expected.Add(visitor);
-            actual = visitorRepository.data;
+            actual = visitorRepository.GetAll();
             Assert.AreEqual(expected[0], actual[0]);
 
         }
@@ -38,8 +38,8 @@ namespace GymTests
         public void TestVisitorShowDiscount()
         {
             Repository<Visitor> visitorRepository;
-            var factory = FactoryCreator.GetFactory();
-            visitorRepository = factory.GetVisitorRepository();
+            //var factory = FactoryCreator.GetFactory();
+            visitorRepository = new VisitorRepository();
             DateTime now = DateTime.Now;
             string currentdate = now.Day.ToString() + now.Month.ToString();
             Visitor visitor = new Visitor("Maksym", "Ukraine", "beginner", currentdate, "Andriy", 0);
@@ -57,9 +57,9 @@ namespace GymTests
         {
             Repository<Visitor> visitorRepository;
             Repository<Trainer> trainerRepository;
-            var factory = FactoryCreator.GetFactory();
-            visitorRepository = factory.GetVisitorRepository();
-            trainerRepository = factory.GetTrainerRepository();
+            //var factory = FactoryCreator.GetFactory();
+            visitorRepository = new VisitorRepository();
+            trainerRepository = new TrainerRepository();
             Visitor visitor1 = new Visitor("Maksym", "Ukraine", "beginner", "254");
             visitorRepository.Add(visitor1);
             Visitor visitor2 = new Visitor("Oksana", "Ukraine", "beginner", "254");

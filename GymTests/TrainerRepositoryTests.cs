@@ -13,8 +13,8 @@ namespace GymTests
         public void TestDeleteTrainerByNegIndex_ThrowException()
         {
             Repository<Trainer> trainerRepository;
-            var factory = FactoryCreator.GetFactory();
-            trainerRepository = factory.GetTrainerRepository();
+            //var factory = FactoryCreator.GetFactory();
+            trainerRepository = new TrainerRepository();
             Assert.ThrowsException<Exception>(() => trainerRepository.Del(-1));
         }
 
@@ -22,14 +22,14 @@ namespace GymTests
         public void TestAddTrainer()
         {
             Repository<Trainer> trainerRepository;
-            var factory = FactoryCreator.GetFactory();
-            trainerRepository = factory.GetTrainerRepository();
+            //var factory = FactoryCreator.GetFactory();
+            trainerRepository = new TrainerRepository();
             Trainer trainer = new Trainer("Andriy", 10, 0);
             trainerRepository.Add(trainer);
             List<Trainer> expected = new List<Trainer>();
             List<Trainer> actual = new List<Trainer>();
             expected.Add(trainer);
-            actual = trainerRepository.data;
+            actual = trainerRepository.GetAll();
             Assert.AreEqual(expected[0], actual[0]);
 
         }
@@ -38,8 +38,8 @@ namespace GymTests
         public void TestMaxTrainer()
         {
             Repository<Trainer> trainerRepository;
-            var factory = FactoryCreator.GetFactory();
-            trainerRepository = factory.GetTrainerRepository();
+            //var factory = FactoryCreator.GetFactory();
+            trainerRepository = new TrainerRepository();
             Trainer trainer1 = new Trainer("Andriy", 10, 0);
             trainerRepository.Add(trainer1);
             Trainer trainer2 = new Trainer("Maksym", 25, 1);
